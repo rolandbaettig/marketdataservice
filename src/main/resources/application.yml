@@ -1,0 +1,55 @@
+logging:
+        file: ${user.dir}/log/marketdataservice.log
+        level:
+            org.apache: ERROR
+            org.hibernate: DEBUG
+
+server:
+    port: 5530
+spring:
+  profiles:
+    active: development
+
+---
+spring:
+    profiles: production
+    datasource:
+        driverClassName: org.postgresql.Driver
+        url: jdbc:postgresql://localhost:5432/marketdataservice
+        username: postgres
+        password: stepae02
+        initialize: false
+    jpa:
+        show-sql: false
+---
+debug: false
+spring:
+    profiles: development
+    datasource:
+        url: jdbc:postgresql://localhost:5432/marketdataservice
+        username: postgres
+        password: stepae02
+        initialize: true
+        data: file:${user.dir}/sqlscripts/domain.sql, file:${user.dir}/sqlscripts/mds.sql
+        driver-class-name: org.postgresql.Driver
+    jpa:
+        show-sql: true
+        generate-ddl: true
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+        schema-generation:
+            create-database-schemas: true
+        hibernate:
+            ddl-auto: create-drop
+            naming:
+                implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+                physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+            id:
+                new_generator_mappings: true
+        properties:
+            hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+            javax.persistence.schema-generation.create-database-schemas: true
+            org.hibernate.envers.revision_field_name: RevisionId
+            org.hibernate.envers.revision_type_field_name : RevisionType
+            org.hibernate.envers.revision_on_collection_change: false
+
+---

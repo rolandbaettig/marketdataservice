@@ -1,0 +1,10 @@
+
+*********************************************
+ Market Data Service
+ Used Profile         ${spring.profiles.active}
+ Version:             ${application.version}
+ Spring Boot Version: ${spring-boot.version}
+ ---
+ (c) 2017, steponline gmbh
+
+ *********************************************
