@@ -21,6 +21,12 @@ import java.util.List;
                 query = "select distinct n from Nation n " +
                         "join fetch n.textEntries tc " +
                         "where n.validFrom<=:evalDate and (n.validTo is null or n.validTo>=:evalDate) " +
+                        "order by n.sortNo,n.isoAlphabetic"),
+        @NamedQuery(name = "NationByIsoCode",
+                query = "select n from Nation n " +
+                        "join fetch n.textEntries tc " +
+                        "where n.IsoAlphabetic=:isoCode " +
+                        "and n.validFrom<=:evalDate and (n.validTo is null or n.validTo>=:evalDate) " +
                         "order by n.sortNo,n.isoAlphabetic")
 })
 public class Nation extends TerritorialDomain implements Serializable {

@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 
 /**
  * Created by Roland on 11.05.17.
@@ -53,6 +54,11 @@ public class EntityPersistenceTest {
         System.out.println(entity.getId());
         assert(entity.getAbbreviation("de").equals("XXX"));
         assert(entity.getAbbreviation("fr").equals("FXXX"));
+        Nation swiss=(Nation) entityManager.createNamedQuery("NationByIsoCode")
+                .setParameter("isoCode","CH")
+                .setParameter("evalDate", LocalDate.now())
+                .getSingleResult();
+        assert(swiss!=null);
     }
 
 
