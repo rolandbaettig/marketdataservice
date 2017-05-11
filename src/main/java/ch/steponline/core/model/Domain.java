@@ -85,7 +85,7 @@ public abstract class Domain extends VersionedEntity {
 
     @Column(name = "IsCustom")
     @NotNull
-    private Integer custom = 1;
+    private Boolean custom = Boolean.TRUE;
 
     @Column(name = "IsoAlphabetic")
     @Size(max = 50)
@@ -330,10 +330,10 @@ public abstract class Domain extends VersionedEntity {
     }
 
     public Boolean getCustom() {
-        return custom==0?Boolean.FALSE:Boolean.TRUE;
+        return custom;
     }
 
-    public void setCustom(Integer custom) {
+    public void setCustom(Boolean custom) {
         this.custom = custom;
     }
 
