@@ -287,12 +287,14 @@ public abstract class Domain extends VersionedEntity {
     }
 
     public String getAbbreviation() {
-        TextEntry textEntry=getTextEntry(getDefaultLanguage());
-        if (textEntry!=null) return textEntry.getAbbreviation();
-        throw new IllegalArgumentException("No TextEntry found for Object DomainRoleRelationDefinition Id: "+getId()+" and Language: "+getDefaultLanguage());
+        return getAbbreviation(getDefaultLanguage());
     }
 
-
+    public String getAbbreviation(String language) {
+        TextEntry textEntry=getTextEntry(language);
+        if (textEntry!=null) return textEntry.getAbbreviation();
+        throw new IllegalArgumentException("No TextEntry found for Object DomainRoleRelationDefinition Id: "+getId()+" and Language: "+language);
+    }
     //****************************************
     // Getters / Setters
     //****************************************

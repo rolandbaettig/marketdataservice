@@ -547,8 +547,8 @@ INSERT INTO core.Domain(Id,DomainRoleId,Version,IsCustom,DomainNo,IsoAlphabetic,
 INSERT INTO core.Domain(Id,DomainRoleId,Version,IsCustom,DomainNo,IsoAlphabetic,IsoNumeric,SortNo,ValidFrom,ValidTo) values (11553,'NATION',0,TRUE,885,'CW','',885,'2011/12/20',NULL);
 INSERT INTO core.Domain(Id,DomainRoleId,Version,IsCustom,DomainNo,IsoAlphabetic,IsoNumeric,SortNo,ValidFrom,ValidTo) values (11555,'NATION',0,TRUE,886,'SX','',886,'2011/12/20',NULL);
 INSERT INTO core.Domain(Id,DomainRoleId,Version,IsCustom,DomainNo,IsoAlphabetic,IsoNumeric,SortNo,ValidFrom,ValidTo) values (11557,'NATION',0,TRUE,887,'BQ','',887,'2011/12/20',NULL);
-INSERT INTO core.Domain(Id,DomainRoleId,Version,IsCustom,DomainNo,IsoAlphabetic,IsoNumeric,SortNo,ValidFrom,ValidTo) values (12221,'CURRENCY',0,1,1055,'RMB',NULL,1055,'1900/01/01',NULL);
-INSERT INTO core.Domain(Id,DomainRoleId,Version,IsCustom,DomainNo,IsoAlphabetic,IsoNumeric,SortNo,ValidFrom,ValidTo) values (12280,'CURRENCY',0,1,1056,'XRH',NULL,1056,'1900/01/01',NULL);
+INSERT INTO core.Domain(Id,DomainRoleId,Version,IsCustom,DomainNo,IsoAlphabetic,IsoNumeric,SortNo,ValidFrom,ValidTo) values (12221,'CURRENCY',0,TRUE,1055,'RMB',NULL,1055,'1900/01/01',NULL);
+INSERT INTO core.Domain(Id,DomainRoleId,Version,IsCustom,DomainNo,IsoAlphabetic,IsoNumeric,SortNo,ValidFrom,ValidTo) values (12280,'CURRENCY',0,TRUE,1056,'XRH',NULL,1056,'1900/01/01',NULL);
 INSERT INTO core.Domain(Id,DomainRoleId,Version,IsCustom,DomainNo,IsoAlphabetic,IsoNumeric,SortNo,ValidFrom,ValidTo) values (12418,'TERRITORIAL',0,TRUE,6005,'EMU Länder',NULL,8,'2000/01/01',NULL);
 INSERT INTO core.Domain(Id,DomainRoleId,Version,IsCustom,DomainNo,IsoAlphabetic,IsoNumeric,SortNo,ValidFrom,ValidTo) values (12420,'TERRITORIAL',0,TRUE,6006,'Skandinavien',NULL,9,'2000/01/01',NULL);
 INSERT INTO core.Domain(Id,DomainRoleId,Version,IsCustom,DomainNo,IsoAlphabetic,IsoNumeric,SortNo,ValidFrom,ValidTo) values (12424,'TERRITORIAL',0,TRUE,6007,'übr. Europa AM',NULL,10,'2000/01/01',NULL);
