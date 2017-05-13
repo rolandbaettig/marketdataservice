@@ -25,7 +25,7 @@ import java.util.List;
         @NamedQuery(name = "NationByIsoCode",
                 query = "select n from Nation n " +
                         "join fetch n.textEntries tc " +
-                        "where n.IsoAlphabetic=:isoCode " +
+                        "where n.isoAlphabetic=:isoCode " +
                         "and n.validFrom<=:evalDate and (n.validTo is null or n.validTo>=:evalDate) " +
                         "order by n.sortNo,n.isoAlphabetic")
 })

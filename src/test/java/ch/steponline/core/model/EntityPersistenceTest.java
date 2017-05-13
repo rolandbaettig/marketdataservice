@@ -5,19 +5,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.junit4.SpringRunner;
+
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
-import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * Created by Roland on 11.05.17.
@@ -41,6 +37,11 @@ public class EntityPersistenceTest {
     public void jpa_test() {
         Currency entity = new Currency();
         entity.setIsoAlphabetic("XXX");
+        entity.setValidFrom(new Date(System.currentTimeMillis()));
+        entity.setSortNo(0.0);
+
+        entityManager.persist(entity);
+        System.out.println(entity.getId());
         DomainTextEntry deTextEntry=new DomainTextEntry(entity,"de");
         DomainTextEntry frTextEntry=new DomainTextEntry(entity,"fr");
         deTextEntry.setAbbreviation(entity.getIsoCode());
@@ -49,14 +50,12 @@ public class EntityPersistenceTest {
         frTextEntry.setDescription("Test FXXX");
         entity.getTextEntries().add(deTextEntry);
         entity.getTextEntries().add(frTextEntry);
-
-        entityManager.persist(entity);
-        System.out.println(entity.getId());
+        
         assert(entity.getAbbreviation("de").equals("XXX"));
         assert(entity.getAbbreviation("fr").equals("FXXX"));
         Nation swiss=(Nation) entityManager.createNamedQuery("NationByIsoCode")
                 .setParameter("isoCode","CH")
-                .setParameter("evalDate", LocalDate.now())
+                .setParameter("evalDate", new Date(System.currentTimeMillis()))
                 .getSingleResult();
         assert(swiss!=null);
     }

@@ -44,13 +44,12 @@ spring:
             naming:
                 implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
                 physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-            id:
-                new_generator_mappings: true
         properties:
             hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
             javax.persistence.schema-generation.create-database-schemas: true
             org.hibernate.envers.revision_field_name: RevisionId
             org.hibernate.envers.revision_type_field_name : RevisionType
             org.hibernate.envers.revision_on_collection_change: false
+            hibernate.id.new_generator_mappings: true
 
 ---

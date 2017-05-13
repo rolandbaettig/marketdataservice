@@ -27,7 +27,8 @@ import java.util.*;
 @AuditTable(value = "DomainRoleRelationDefinition", schema = "audit")
 public class DomainRoleRelationDefinition extends VersionedEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO,generator = "domainRoleRelationDefinition_seq")
+    @SequenceGenerator(name="domainRoleRelationDefinition_seq",sequenceName = "DomainRoleRelationDefinition_Seq",initialValue = 1000,allocationSize = 1)
     @Column(name = "Id")
     private Long id;
 

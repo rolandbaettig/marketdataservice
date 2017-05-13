@@ -60,7 +60,8 @@ import java.util.*;
 @AuditTable(value = "Domain", schema = "audit")
 public abstract class Domain extends VersionedEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator="domain_seq",strategy = GenerationType.AUTO)
+    @SequenceGenerator(name="domain_seq",schema = "core",sequenceName = "Domain_Seq",initialValue = 10000,allocationSize = 1)
     @Column(name = "Id")
     private Long id;
 
@@ -80,7 +81,6 @@ public abstract class Domain extends VersionedEntity {
     private Date validTo;
 
     @Column(name = "DomainNo", nullable = true)
-    @Size(min = 0)
     private Long domainNo;
 
     @Column(name = "IsCustom")
@@ -101,23 +101,23 @@ public abstract class Domain extends VersionedEntity {
 
     @OneToMany(mappedBy = "domain",fetch = FetchType.LAZY, cascade = CascadeType.ALL,orphanRemoval = true)
     @org.hibernate.annotations.OptimisticLock(excluded = true)
-    @org.hibernate.annotations.BatchSize(size = 100)
+    @org.hibernate.annotations.BatchSize(size = 20)
     private Set<DomainTextEntry> textEntries = new HashSet<DomainTextEntry>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "domain",orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @org.hibernate.annotations.OptimisticLock(excluded = true)
-    @org.hibernate.annotations.BatchSize(size = 100)
+    @org.hibernate.annotations.BatchSize(size = 20)
     private Set<DomainAttribute> domainAttributes = new HashSet<DomainAttribute>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "domainFrom",orphanRemoval = true)
-    @org.hibernate.annotations.BatchSize(size = 100)
+    @org.hibernate.annotations.BatchSize(size = 50)
     @org.hibernate.annotations.OptimisticLock(excluded = true)
     private Set<DomainRelation> fromDomainRelations = new HashSet<DomainRelation>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "domainTo",orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @org.hibernate.annotations.BatchSize(size = 100)
+    @org.hibernate.annotations.BatchSize(size = 50)
     @org.hibernate.annotations.OptimisticLock(excluded = true)
     private Set<DomainRelation> toDomainRelations = new HashSet<DomainRelation>();
 

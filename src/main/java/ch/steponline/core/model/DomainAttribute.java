@@ -19,7 +19,8 @@ import javax.validation.constraints.Size;
 @AuditTable(value = "DomainAttribute", schema = "audit")
 public class DomainAttribute extends VersionedEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator="domainAttribute_seq",strategy = GenerationType.AUTO)
+    @SequenceGenerator(name="domainAttribute_seq",schema = "core",sequenceName = "DomainAttribute_Seq",initialValue = 1000,allocationSize = 1)
     @Column(name = "Id")
     private Long id;
 

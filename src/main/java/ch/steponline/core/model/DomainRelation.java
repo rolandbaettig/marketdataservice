@@ -26,7 +26,8 @@ import java.util.Date;
 @AuditTable(value = "DomainRelation", schema = "audit")
 public class DomainRelation extends VersionedEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator="domainRelation_seq",strategy = GenerationType.AUTO)
+    @SequenceGenerator(name="domainRelation_seq",schema = "core",sequenceName = "DomainRelation_Seq",initialValue = 10000,allocationSize = 1)
     @Column(name = "Id")
     private Long id;
 

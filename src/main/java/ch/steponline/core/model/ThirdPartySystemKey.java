@@ -44,7 +44,8 @@ import java.io.Serializable;
 @AuditTable(value = "ThirdPartySystemKey", schema = "audit")
 public class ThirdPartySystemKey implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO,generator = "thirdPartySystemKey_seq")
+    @SequenceGenerator(name="thirdPartySystemKey_seq",schema = "core",sequenceName ="ThirdPartySystemKey_Seq",initialValue = 1000,allocationSize = 1)
     @Column(name = "Id")
     private Long id;
 

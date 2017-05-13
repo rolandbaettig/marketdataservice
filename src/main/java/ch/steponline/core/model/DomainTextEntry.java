@@ -24,7 +24,7 @@ import java.io.Serializable;
 @AuditTable(value = "DomainTextEntry", schema = "audit")
 public class DomainTextEntry extends TextEntry {
 
-    @ManyToOne(optional = false,fetch= FetchType.LAZY)
+    @ManyToOne(optional = false,fetch= FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "SourceId", referencedColumnName = "Id", insertable = false, updatable = false,foreignKey = @ForeignKey(name = "FK_DomainTextContainer_Domain"))
     @OnDelete(action = OnDeleteAction.CASCADE)
     @org.hibernate.annotations.OptimisticLock(excluded = true)
