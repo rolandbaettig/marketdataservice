@@ -6,9 +6,6 @@ logging:
 
 server:
     port: 5530
-spring:
-  profiles:
-    active: development
 
 ---
 spring:
@@ -37,8 +34,6 @@ spring:
         show-sql: true
         generate-ddl: true
         database-platform: org.hibernate.dialect.PostgreSQLDialect
-        schema-generation:
-            create-database-schemas: true
         hibernate:
             ddl-auto: create-drop
             naming:
@@ -51,5 +46,28 @@ spring:
             org.hibernate.envers.revision_type_field_name : RevisionType
             org.hibernate.envers.revision_on_collection_change: false
             hibernate.id.new_generator_mappings: true
-
+---
+debug: false
+spring:
+    profiles: development-derby
+    datasource:
+        initialize: true
+        data: file:${user.dir}/sqlscripts/domain-${spring.datasource.platform}.sql, file:${user.dir}/sqlscripts/mds.sql
+        platform: derby
+    jpa:
+        show-sql: true
+        generate-ddl: true
+        database-platform: org.hibernate.dialect.DerbyDialect
+        hibernate:
+            ddl-auto: create-drop
+            naming:
+                implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+                physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        properties:
+            hibernate.dialect: org.hibernate.dialect.DerbyDialect
+            javax.persistence.schema-generation.create-database-schemas: true
+            org.hibernate.envers.revision_field_name: RevisionId
+            org.hibernate.envers.revision_type_field_name : RevisionType
+            org.hibernate.envers.revision_on_collection_change: false
+            hibernate.id.new_generator_mappings: true
 ---

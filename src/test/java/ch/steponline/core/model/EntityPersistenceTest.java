@@ -41,6 +41,7 @@ public class EntityPersistenceTest {
         entity.setSortNo(0.0);
 
         entityManager.persist(entity);
+        Long entityId=entity.getId();
         System.out.println(entity.getId());
         DomainTextEntry deTextEntry=new DomainTextEntry(entity,"de");
         DomainTextEntry frTextEntry=new DomainTextEntry(entity,"fr");
@@ -50,7 +51,11 @@ public class EntityPersistenceTest {
         frTextEntry.setDescription("Test FXXX");
         entity.getTextEntries().add(deTextEntry);
         entity.getTextEntries().add(frTextEntry);
-        
+        entityManager.persist(entity);
+        entityManager.flush();
+        entityManager.clear();
+        entity=entityManager.find(Currency.class,entityId);
+
         assert(entity.getAbbreviation("de").equals("XXX"));
         assert(entity.getAbbreviation("fr").equals("FXXX"));
         Nation swiss=(Nation) entityManager.createNamedQuery("NationByIsoCode")
