@@ -2,6 +2,7 @@ package ch.steponline.core.dto;
 
 import ch.steponline.core.model.Domain;
 import ch.steponline.core.model.TextEntry;
+import com.fasterxml.jackson.annotation.JsonFilter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  * Created by Roland on 13.06.17.
  */
+@JsonFilter("DomainFilter")
 public class DomainDTO implements Serializable{
 
         private Long id;
@@ -31,7 +33,7 @@ public class DomainDTO implements Serializable{
 
         private Double sortNo;
 
-        private List<DomainTextEntryDTO> textEntries = new ArrayList<DomainTextEntryDTO>();
+        private List<TextEntryDTO> textEntries = new ArrayList<TextEntryDTO>();
 
     public DomainDTO() {
     }
@@ -45,7 +47,7 @@ public class DomainDTO implements Serializable{
         this.isoNumeric=domain.getIsoNumeric();
         this.sortNo=domain.getSortNo();
         for (TextEntry textEntry:domain.getTextEntries()) {
-            textEntries.add(new DomainTextEntryDTO(textEntry));
+            textEntries.add(new TextEntryDTO(textEntry));
         }
     }
 
@@ -121,11 +123,11 @@ public class DomainDTO implements Serializable{
         this.sortNo = sortNo;
     }
 
-    public List<DomainTextEntryDTO> getTextEntries() {
+    public List<TextEntryDTO> getTextEntries() {
         return textEntries;
     }
 
-    public void setTextEntries(List<DomainTextEntryDTO> textEntries) {
+    public void setTextEntries(List<TextEntryDTO> textEntries) {
         this.textEntries = textEntries;
     }
 }

@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * Created by Roland on 13.06.17.
  */
-public class DomainTextEntryDTO implements Serializable{
+public class TextEntryDTO implements Serializable{
 
     private String language;
 
@@ -18,10 +18,10 @@ public class DomainTextEntryDTO implements Serializable{
 
     private String documentation;
 
-    public DomainTextEntryDTO() {
+    public TextEntryDTO() {
     }
 
-    public DomainTextEntryDTO(TextEntry textEntry) {
+    public TextEntryDTO(TextEntry textEntry) {
         this.language=textEntry.getId().getLanguage();
         this.abbreviation=textEntry.getAbbreviation();
         this.description=textEntry.getDescription();

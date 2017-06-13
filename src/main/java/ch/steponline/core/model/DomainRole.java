@@ -42,6 +42,11 @@ public class DomainRole extends VersionedEntity {
 
     private static final long serialVersionUID = -6570102817645411251L;
 
+    public enum ROLES {
+        CURRENCY,
+        NATION,
+        TERRITORIAL
+    }
     //****************************************
     // Bid-Directional Associations
     //****************************************
