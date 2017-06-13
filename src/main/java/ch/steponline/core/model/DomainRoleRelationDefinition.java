@@ -1,6 +1,7 @@
 package ch.steponline.core.model;
 
 import ch.steponline.mds.util.SystemDefaultLanguage;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.OptimisticLock;
@@ -38,11 +39,13 @@ public class DomainRoleRelationDefinition extends VersionedEntity {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "FromDomainRoleId", referencedColumnName = "Id",foreignKey = @ForeignKey(name = "FK_DomainRoleRelationDef_DomainRoleFrom_Id" ),columnDefinition = "VARCHAR(150)")
+    @JsonIgnore
     private DomainRole fromDomainRole;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "ToDomainRoleId", referencedColumnName = "Id",foreignKey = @ForeignKey(name = "FK_DomainRoleRelationDef_DomainRoleTo_Id" ),columnDefinition = "VARCHAR(150)")
     @NotNull
+    @JsonIgnore
     private DomainRole toDomainRole;
 
     @Column(name = "IsMandatory")

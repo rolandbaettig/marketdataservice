@@ -8,6 +8,5 @@ import org.springframework.stereotype.Repository;
 /**
  * Created by Roland on 11.05.17.
  */
-@Repository
-public interface DomainRepository extends CrudRepository<Domain,Long>{
+public interface DomainRepository extends JpaRepository<Domain,Long>{
 }
