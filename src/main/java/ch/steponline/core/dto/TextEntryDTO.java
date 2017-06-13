@@ -2,12 +2,14 @@ package ch.steponline.core.dto;
 
 import ch.steponline.core.model.DomainTextEntry;
 import ch.steponline.core.model.TextEntry;
+import com.fasterxml.jackson.annotation.JsonFilter;
 
 import java.io.Serializable;
 
 /**
  * Created by Roland on 13.06.17.
  */
+@JsonFilter("TextEntryFilter")
 public class TextEntryDTO implements Serializable{
 
     private String language;

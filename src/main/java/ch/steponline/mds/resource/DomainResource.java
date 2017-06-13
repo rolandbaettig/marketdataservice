@@ -42,8 +42,10 @@ public class DomainResource {
         List<Domain> domains= domainRepo.findAllDomainsWithRole(DomainRole.ROLES.CURRENCY.toString());
         List<DomainDTO> currencies= getDomainDtos(domains);
         String[] properties=new String[]{"id","isoAlphabetic","textEntries"};
+        String[] textProperties=new String[] {"language","description"};
         MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(currencies);
-        FilterProvider filter = new SimpleFilterProvider().addFilter("DomainFilter", SimpleBeanPropertyFilter.filterOutAllExcept(properties));
+        FilterProvider filter = new SimpleFilterProvider().addFilter("DomainFilter", SimpleBeanPropertyFilter.filterOutAllExcept(properties))
+                .addFilter("TextEntryFilter",SimpleBeanPropertyFilter.filterOutAllExcept(textProperties));
         mappingJacksonValue.setFilters(filter);
         return mappingJacksonValue;
     }
