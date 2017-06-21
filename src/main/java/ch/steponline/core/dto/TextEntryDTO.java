@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 @JsonFilter("TextEntryFilter")
 public class TextEntryDTO implements Serializable{
-
+    public static final String[] POSSIBLE_PROPERTIES=new String[]{"language","appreviation","description","documentation"};
     private String language;
 
     private String abbreviation;

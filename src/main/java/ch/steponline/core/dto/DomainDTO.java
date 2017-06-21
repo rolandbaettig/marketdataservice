@@ -14,7 +14,12 @@ import java.util.List;
  */
 @JsonFilter("DomainFilter")
 public class DomainDTO implements Serializable{
-
+        public enum POSSIBLE_PROPERTIES{
+            id,domainRole,validFrom,validTo,domainNo,custom,isoAlphabetic,isoNumeric,sortNo,textEntries;
+        }
+        public enum POSSIBLE_CHILDS {
+            TextEntry
+        }
         private Long id;
 
         private String domainRole;

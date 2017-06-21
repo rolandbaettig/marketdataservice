@@ -1,46 +1,48 @@
 package ch.steponline.core.model;
 
-import ch.steponline.core.service.DomainRepository;
+import ch.steponline.core.repository.DomainRepository;
+import ch.steponline.core.repository.DomainRoleRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
+import javax.persistence.EntityManagerFactory;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Roland on 11.05.17.
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@Transactional
-@SpringBootConfiguration
 @SpringBootTest
-@ComponentScan(basePackages = {"ch.steponline"})
-@EnableJpaRepositories(basePackages = "ch.steponline")
+@ActiveProfiles(profiles = {"development"})
 public class EntityPersistenceTest {
 
     @Autowired
     private DomainRepository domainRepository;
 
     @Autowired
-    private EntityManager entityManager;
+    private DomainRoleRepository domainRoleRepository;
+
+    @Autowired
+    private EntityManagerFactory entityManagerFactory;
 
     @Test
     public void jpa_test() {
+        DomainRole currencyRole=domainRoleRepository.findOne("CURRENCY");
         Currency entity = new Currency();
+        entity.setDomainRole(currencyRole);
         entity.setIsoAlphabetic("XXX");
         entity.setValidFrom(new Date(System.currentTimeMillis()));
         entity.setSortNo(0.0);
-
-        entityManager.persist(entity);
+        entity=domainRepository.saveAndFlush(entity);
         Long entityId=entity.getId();
         System.out.println(entity.getId());
         DomainTextEntry deTextEntry=new DomainTextEntry(entity,"de");
@@ -51,13 +53,10 @@ public class EntityPersistenceTest {
         frTextEntry.setDescription("Test FXXX");
         entity.getTextEntries().add(deTextEntry);
         entity.getTextEntries().add(frTextEntry);
-        entityManager.persist(entity);
-        entityManager.flush();
-        entityManager.clear();
-        entity=entityManager.find(Currency.class,entityId);
-
+        entity=domainRepository.saveAndFlush(entity);
         assert(entity.getAbbreviation("de").equals("XXX"));
         assert(entity.getAbbreviation("fr").equals("FXXX"));
+        EntityManager entityManager=entityManagerFactory.createEntityManager();
         Nation swiss=(Nation) entityManager.createNamedQuery("NationByIsoCode")
                 .setParameter("isoCode","CH")
                 .setParameter("evalDate", new Date(System.currentTimeMillis()))
@@ -65,5 +64,9 @@ public class EntityPersistenceTest {
         assert(swiss!=null);
     }
 
-
+    @Test
+    public void jpa_repotest() {
+        List<Domain> currencies=domainRepository.findAllDomainsWithRole("CURRENCY");
+        assert(currencies.size()>0);
+    }
 }

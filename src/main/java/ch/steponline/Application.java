@@ -14,9 +14,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * Time: 12:57
  */
 @SpringBootApplication
-@EnableAutoConfiguration
-@EnableTransactionManagement
-@EntityScan(basePackages = "ch.steponline")
 @ComponentScan(basePackages = "ch.steponline")
 public class Application {
 

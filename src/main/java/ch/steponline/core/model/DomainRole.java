@@ -36,7 +36,7 @@ public class DomainRole extends VersionedEntity {
     @org.hibernate.annotations.OptimisticLock(excluded = true)
     private Set<DomainRoleRelationDefinition> toDomainRoleRelationDefinitions = new HashSet<DomainRoleRelationDefinition>();
 
-    @OneToMany(mappedBy = "domainRole", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "domainRole", fetch = FetchType.EAGER)
     @org.hibernate.annotations.OptimisticLock(excluded = true)
     private Set<Domain> domains = new HashSet<Domain>();
 
@@ -121,8 +121,8 @@ public class DomainRole extends VersionedEntity {
             domain.setDomainRole(this);
         }
 
-        if (!this.domains.contains(domain)) {
-            this.domains.add(domain);
+        if (!this.getDomains().contains(domain)) {
+            this.getDomains().add(domain);
         }
     }
 
@@ -130,7 +130,7 @@ public class DomainRole extends VersionedEntity {
         if (domain == null) throw new IllegalArgumentException("identity Object is NULL");
 
         if (domain.getDomainRole() != null && domain.getDomainRole().equals(this)) {
-            this.domains.remove(domain);
+            this.getDomains().remove(domain);
             domain.setDomainRole(null);
         }
     }
