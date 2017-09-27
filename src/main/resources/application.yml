@@ -4,6 +4,8 @@ logging:
             org.apache: ERROR
             org.hibernate: ERROR
 
+debug: false
+
 server:
     port: 5530
 
@@ -25,7 +27,6 @@ spring:
     jpa:
         show-sql: false
 ---
-debug: false
 spring:
     profiles: development
     datasource:
@@ -38,15 +39,12 @@ spring:
         platform: postgresql
     jpa:
         show-sql: true
-        generate-ddl: true
-        database-platform: org.hibernate.dialect.PostgreSQLDialect
         hibernate:
             ddl-auto: create
             naming:
                 implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
                 physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         properties:
-            hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
             javax.persistence.schema-generation.create-database-schemas: true
             org.hibernate.envers.revision_field_name: RevisionId
             org.hibernate.envers.revision_type_field_name : RevisionType
@@ -57,21 +55,17 @@ debug: false
 spring:
     profiles: test
     datasource:
-        initialize: true
         data: file:${user.dir}/sqlscripts/domain-${spring.datasource.platform}.sql, file:${user.dir}/sqlscripts/mds.sql
         platform: derby
+        initialize: true
     jpa:
         show-sql: true
-        generate-ddl: true
-        database-platform: org.hibernate.dialect.DerbyDialect
         hibernate:
             ddl-auto: create-drop
             naming:
                 implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
                 physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         properties:
-            hibernate.dialect: org.hibernate.dialect.DerbyDialect
-            javax.persistence.schema-generation.create-database-schemas: true
             org.hibernate.envers.revision_field_name: RevisionId
             org.hibernate.envers.revision_type_field_name : RevisionType
             org.hibernate.envers.revision_on_collection_change: false

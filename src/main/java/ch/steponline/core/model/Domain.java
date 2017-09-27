@@ -111,7 +111,7 @@ public abstract class Domain extends VersionedEntity {
 
     @OneToMany(mappedBy = "domain",fetch = FetchType.LAZY, cascade = CascadeType.ALL,orphanRemoval = true)
     @org.hibernate.annotations.OptimisticLock(excluded = true)
-    @org.hibernate.annotations.BatchSize(size = 20)
+    @org.hibernate.annotations.BatchSize(size = 200)
     private Set<DomainTextEntry> textEntries = new HashSet<DomainTextEntry>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "domain",orphanRemoval = true)

@@ -14,4 +14,7 @@ public interface DomainRepository extends JpaRepository<Domain,Long>{
 
     @Query(value = "select d from Domain d where d.domainRole.id=:role")
     public List<Domain> findAllDomainsWithRole(@Param(value="role") String role);
+
+    @Query(value = "select d from Domain d where d.domainRole.id=:role and d.validTo is null")
+    public List<Domain> findAllActiveDomainsWithRole(@Param(value="role") String role);
 }

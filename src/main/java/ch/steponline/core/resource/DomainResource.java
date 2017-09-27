@@ -71,7 +71,7 @@ public class DomainResource {
     @RequestMapping(path="currency", method= RequestMethod.GET)
     @ApiOperation(value="List of all Currencies",response = Currency.class,responseContainer = "List")
     public @ResponseBody MappingJacksonValue getCurrencies(@RequestHeader(value = "x-steponline-attributes",required = false) String attributes) {
-        List<Domain> domains= domainRepo.findAllDomainsWithRole(DomainRole.ROLES.CURRENCY.toString());
+        List<Domain> domains= domainRepo.findAllActiveDomainsWithRole(DomainRole.ROLES.CURRENCY.toString());
         List<DomainDTO> currencies= getDomainDtos(domains);
 
         String[] properties=DomainDTO.getPossiblePropertiesAsString();
