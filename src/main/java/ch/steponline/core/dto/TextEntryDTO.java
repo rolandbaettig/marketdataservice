@@ -5,13 +5,15 @@ import ch.steponline.core.model.TextEntry;
 import com.fasterxml.jackson.annotation.JsonFilter;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * Created by Roland on 13.06.17.
  */
 @JsonFilter("TextEntryFilter")
 public class TextEntryDTO implements Serializable{
-    public static final String[] POSSIBLE_PROPERTIES=new String[]{"language","appreviation","description","documentation"};
+    public enum POSSIBLE_PROPERTIES{language,appreviation,description,documentation};
+
     private String language;
 
     private String abbreviation;
@@ -20,6 +22,13 @@ public class TextEntryDTO implements Serializable{
 
     private String documentation;
 
+    public static String[] getPossiblePropertiesAsString() {
+        return getEnumNames(POSSIBLE_PROPERTIES.class);
+    }
+
+    private static String[] getEnumNames(Class<? extends Enum<?>> e) {
+        return Arrays.stream(e.getEnumConstants()).map(Enum::name).toArray(String[]::new);
+    }
     public TextEntryDTO() {
     }
 

@@ -49,7 +49,7 @@ spring:
 ---
 debug: false
 spring:
-    profiles: development-derby
+    profiles: test
     datasource:
         initialize: true
         data: file:${user.dir}/sqlscripts/domain-${spring.datasource.platform}.sql, file:${user.dir}/sqlscripts/mds.sql

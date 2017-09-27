@@ -1,4 +1,4 @@
-package ch.steponline.mds.resource;
+package ch.steponline.core.resource;
 
 import ch.steponline.core.dto.DomainDTO;
 import ch.steponline.core.dto.TextEntryDTO;
@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.google.common.base.Splitter;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +37,31 @@ public class DomainResource {
     }
 
     @RequestMapping(method= RequestMethod.GET)
-    public @ResponseBody List<DomainDTO> getDomains() {
+    @ResponseBody
+    @ApiOperation(
+            value="Delivers all domains with the desired attributes." +
+                    "The desired attributes must be delivered int the Request-Header" +
+                    "If no attributes are defined, the method returns all properties of the domain object."
+    )
+    public MappingJacksonValue getDomains(
+            @ApiParam(value="Possible Attributes:id,domainRole,validFrom,validTo,domainNo,custom,isoAlphabetic,isoNumeric,sortNo,textEntries")
+            @RequestHeader(value="x-steponline-attributes",required = false)
+            String attributes
+    ) {
         List<Domain> domains= domainRepo.findAll();
-        return getDomainDtos(domains);
+
+        List<DomainDTO> domainDTOS= getDomainDtos(domains);
+        MappingJacksonValue res=new MappingJacksonValue(domainDTOS);
+        SimpleFilterProvider filter=new SimpleFilterProvider();
+        String[] properties=DomainDTO.getPossiblePropertiesAsString();
+        if (attributes!=null && !attributes.isEmpty()) {
+            properties=new String[]{};
+            properties=Splitter.on(",").trimResults().splitToList(attributes).toArray(properties);
+        }
+        filter.addFilter("DomainFilter",SimpleBeanPropertyFilter.filterOutAllExcept(properties));
+        filter.addFilter("TextEntryFilter",SimpleBeanPropertyFilter.filterOutAllExcept(TextEntryDTO.getPossiblePropertiesAsString()));
+        res.setFilters(filter);
+        return res;
     }
 
     @RequestMapping(path="currency", method= RequestMethod.GET)
@@ -47,9 +70,9 @@ public class DomainResource {
         List<Domain> domains= domainRepo.findAllDomainsWithRole(DomainRole.ROLES.CURRENCY.toString());
         List<DomainDTO> currencies= getDomainDtos(domains);
 
-        String[] properties=getStringFromEnum(DomainDTO.POSSIBLE_PROPERTIES.values());
+        String[] properties=DomainDTO.getPossiblePropertiesAsString();
 
-        String[] textProperties= TextEntryDTO.POSSIBLE_PROPERTIES;
+        String[] textProperties= TextEntryDTO.getPossiblePropertiesAsString();
         MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(currencies);
         SimpleFilterProvider filter = new SimpleFilterProvider();
         if (attributes!=null && !attributes.isEmpty()) {
@@ -60,11 +83,7 @@ public class DomainResource {
         mappingJacksonValue.setFilters(filter);
         return mappingJacksonValue;
     }
-
-    private String[] getStringFromEnum(Enum[] e) {
-        return Arrays.stream(e).map(Enum::toString).toArray(String[]::new);
-    }
-
+    
 // TODO: Source Object übergeben und anhand der Properties (mit . getrennt den entprechenden Filter unc die Properties returnieren. Das ganze via refleciont.
 
     @RequestMapping(path="nation", method= RequestMethod.GET)

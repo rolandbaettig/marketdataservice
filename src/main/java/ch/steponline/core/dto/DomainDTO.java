@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class DomainDTO implements Serializable{
         public enum POSSIBLE_PROPERTIES{
             id,domainRole,validFrom,validTo,domainNo,custom,isoAlphabetic,isoNumeric,sortNo,textEntries;
         }
+
         public enum POSSIBLE_CHILDS {
             TextEntry
         }
@@ -39,6 +41,14 @@ public class DomainDTO implements Serializable{
         private Double sortNo;
 
         private List<TextEntryDTO> textEntries = new ArrayList<TextEntryDTO>();
+
+        public static String[] getPossiblePropertiesAsString() {
+            return getEnumNames(POSSIBLE_PROPERTIES.class);
+        }
+
+        private static String[] getEnumNames(Class<? extends Enum<?>> e) {
+            return Arrays.stream(e.getEnumConstants()).map(Enum::name).toArray(String[]::new);
+        }
 
     public DomainDTO() {
     }
