@@ -3,6 +3,8 @@ package ch.steponline.core.dto;
 import ch.steponline.core.model.Domain;
 import ch.steponline.core.model.TextEntry;
 import com.fasterxml.jackson.annotation.JsonFilter;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import java.util.List;
  * Created by Roland on 13.06.17.
  */
 @JsonFilter("DomainFilter")
+@ApiModel(value = "DomainDto")
 public class DomainDTO implements Serializable{
         public enum POSSIBLE_PROPERTIES{
             id,domainRole,validFrom,validTo,domainNo,custom,isoAlphabetic,isoNumeric,sortNo,textEntries;
@@ -22,14 +25,19 @@ public class DomainDTO implements Serializable{
         public enum POSSIBLE_CHILDS {
             TextEntry
         }
+        @ApiModelProperty(value="Id of the domain",example="1",position = 1)
         private Long id;
 
+        @ApiModelProperty(value="Role of the domain",example="CURRENCY",allowableValues = "CURRENCY,NATION,TERRITORIAL",allowEmptyValue = false,position = 2)
         private String domainRole;
 
-        private Date validFrom = new Date();
+        @ApiModelProperty(value="At which date the DomainDto is valid",example = "2015-09-18",allowEmptyValue = false,position = 3)
+        private Date validFrom;
 
+        @ApiModelProperty(value="At which date the DomainDto is invalid",example = "2017-10-13",allowEmptyValue = true,position = 4)
         private Date validTo;
 
+        @ApiModelProperty(value="Unique number for a DomainDto with in a domainRole",position = 5)
         private Long domainNo;
 
         private Boolean custom = Boolean.TRUE;
@@ -55,6 +63,8 @@ public class DomainDTO implements Serializable{
 
     public DomainDTO(Domain domain) {
         this.id=domain.getId();
+        this.validFrom=domain.getValidFrom();
+        this.validTo=domain.getValidTo();
         this.custom=domain.getCustom();
         this.domainNo=domain.getDomainNo();
         this.domainRole=domain.getDomainRole().getId();

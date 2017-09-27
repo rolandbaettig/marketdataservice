@@ -1,6 +1,10 @@
 package ch.steponline.core.model;
 
 import ch.steponline.mds.util.SystemDefaultLanguage;
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.*;
 import org.hibernate.envers.AuditJoinTable;
 import org.hibernate.envers.AuditTable;
@@ -58,29 +62,35 @@ import java.util.*;
 })
 @Audited
 @AuditTable(value = "Domain", schema = "audit")
+@ApiModel(value = "DomainDto")
 public abstract class Domain extends VersionedEntity {
     @Id
     @GeneratedValue(generator="domain_seq",strategy = GenerationType.AUTO)
     @SequenceGenerator(name="domain_seq",schema = "core",sequenceName = "Domain_Seq",initialValue = 10000,allocationSize = 1)
     @Column(name = "Id")
+    @ApiModelProperty(value="Id of the domain",example="1",position = 1)
     private Long id;
 
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     // @NotNull nicht verwenden wird über @AssetTrue gelöst
     @JoinColumn(name = "DomainRoleId",referencedColumnName = "Id",foreignKey = @ForeignKey(name = "FK_Domain_DomainRoleId"),insertable = false,updatable = false) // Has to be insertable/updateable false because its the DiscriminatorValue and otherwise hibernate would throw ad MappingException
     @org.hibernate.annotations.OptimisticLock(excluded = true)
+    @ApiModelProperty(value="Role of the domain",example="CURRENCY",allowableValues = "CURRENCY,NATION,TERRITORIAL",allowEmptyValue = false,position = 2)
     private DomainRole domainRole;
 
     @Column(name = "ValidFrom")
     @Temporal(TemporalType.DATE)
     @NotNull
-    private Date validFrom = new Date();
+    @ApiModelProperty(value="At which date the DomainDto is valid",example = "2015-09-18",allowEmptyValue = false,position = 3)
+    private Date validFrom;
 
     @Column(name = "ValidTo")
     @Temporal(TemporalType.DATE)
+    @ApiModelProperty(value="At which date the DomainDto is invalid",example = "2017-10-13",allowEmptyValue = true,position = 4)
     private Date validTo;
 
     @Column(name = "DomainNo", nullable = true)
+    @ApiModelProperty(value="Unique number for a DomainDto with in a domainRole",position = 5)
     private Long domainNo;
 
     @Column(name = "IsCustom")

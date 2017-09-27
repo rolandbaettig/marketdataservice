@@ -7,6 +7,12 @@ logging:
 server:
     port: 5530
 
+# prevents that a date is serialized as a timestamp, which is the default
+spring:
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
 ---
 spring:
     profiles: production

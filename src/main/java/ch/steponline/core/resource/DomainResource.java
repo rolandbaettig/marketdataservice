@@ -12,9 +12,13 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.google.common.base.Splitter;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.Example;
+import io.swagger.annotations.ExampleProperty;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
 
@@ -66,7 +70,7 @@ public class DomainResource {
 
     @RequestMapping(path="currency", method= RequestMethod.GET)
     @ApiOperation(value="List of all Currencies",response = Currency.class,responseContainer = "List")
-    public @ResponseBody MappingJacksonValue getCurrencies(@RequestHeader(value = "x-steponline-attributes") String attributes) {
+    public @ResponseBody MappingJacksonValue getCurrencies(@RequestHeader(value = "x-steponline-attributes",required = false) String attributes) {
         List<Domain> domains= domainRepo.findAllDomainsWithRole(DomainRole.ROLES.CURRENCY.toString());
         List<DomainDTO> currencies= getDomainDtos(domains);
 
@@ -77,13 +81,26 @@ public class DomainResource {
         SimpleFilterProvider filter = new SimpleFilterProvider();
         if (attributes!=null && !attributes.isEmpty()) {
             properties=new String[]{};
+            properties=Splitter.on(",").trimResults().splitToList(attributes).toArray(properties);
         }
         filter.addFilter("DomainFilter", SimpleBeanPropertyFilter.filterOutAllExcept(properties))
                 .addFilter("TextEntryFilter",SimpleBeanPropertyFilter.filterOutAllExcept(textProperties));
         mappingJacksonValue.setFilters(filter);
         return mappingJacksonValue;
     }
-    
+
+    @PostMapping
+    public ResponseEntity<Domain> createDomain(
+            @ApiParam(value="domain",examples = @Example(
+                    value={
+                            @ExampleProperty(value="{\"domainRole\":\"CURRENCY\",”domainNo\":12345}"),
+                            @ExampleProperty(value="{\"domainRole\":\"NATION\",”domainNo\":566777}")
+                    }))
+            @RequestBody Domain domain
+    ) {
+        return new ResponseEntity<>(domainRepo.save(domain), HttpStatus.OK);
+    }
+
 // TODO: Source Object übergeben und anhand der Properties (mit . getrennt den entprechenden Filter unc die Properties returnieren. Das ganze via refleciont.
 
     @RequestMapping(path="nation", method= RequestMethod.GET)
