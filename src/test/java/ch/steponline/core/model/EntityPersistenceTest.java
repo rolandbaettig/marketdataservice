@@ -22,7 +22,7 @@ import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-@ActiveProfiles(profiles = {"development"})
+@ActiveProfiles(profiles = {"test"})
 public class EntityPersistenceTest {
 
     @Autowired
