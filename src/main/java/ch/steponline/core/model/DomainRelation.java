@@ -1,5 +1,6 @@
 package ch.steponline.core.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 
@@ -35,12 +36,14 @@ public class DomainRelation extends VersionedEntity {
     @JoinColumn(name = "DomainFromId",referencedColumnName = "Id",foreignKey = @ForeignKey(name="FK_DomainRelation_DomainFrom_Id"))
     @org.hibernate.annotations.OptimisticLock(excluded = true)
     @NotNull
+    @JsonIgnore
     private Domain domainFrom;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "DomainToId",referencedColumnName = "Id",foreignKey = @ForeignKey(name="FK_DomainRelation_DomainTo_Id"))
     @org.hibernate.annotations.OptimisticLock(excluded = true)
     @NotNull
+    @JsonIgnore
     private Domain domainTo;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

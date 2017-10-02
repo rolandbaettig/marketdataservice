@@ -1,5 +1,6 @@
 package ch.steponline.core.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.envers.AuditTable;
@@ -26,6 +27,7 @@ public class DomainRoleRelDefinitionTextEntry extends TextEntry {
     @ManyToOne(optional = false)
     @JoinColumn(name = "SourceId", referencedColumnName = "Id", insertable = false, updatable = false,foreignKey = @ForeignKey(name = "FK_DomainRoleRelDefTextContainer_DomainRoleRelDef"))
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private DomainRoleRelationDefinition domainRoleRelationDefinition;
     private static final long serialVersionUID = 6407401472294074419L;
 

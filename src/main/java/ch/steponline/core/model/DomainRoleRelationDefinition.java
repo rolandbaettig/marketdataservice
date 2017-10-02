@@ -57,6 +57,7 @@ public class DomainRoleRelationDefinition extends VersionedEntity {
     private Boolean factorVisible = Boolean.TRUE;
 
     @OneToMany(mappedBy = "domainRoleRelationDefinition", fetch = FetchType.LAZY,orphanRemoval = true)
+    @JsonIgnore
     private Set<DomainRelation> domainRelations = new HashSet<DomainRelation>();
 
     @OneToMany(mappedBy = "domainRoleRelationDefinition",fetch = FetchType.LAZY, cascade = CascadeType.ALL,orphanRemoval = true)

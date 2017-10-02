@@ -1,5 +1,6 @@
 package ch.steponline.core.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 
@@ -26,6 +27,7 @@ public class DomainAttribute extends VersionedEntity {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "DomainId",referencedColumnName = "Id",foreignKey = @ForeignKey(name="FK_DomainAttribute_Domain_Id"))
+    @JsonIgnore
     private Domain domain;
 
     @Column(name = "Name")

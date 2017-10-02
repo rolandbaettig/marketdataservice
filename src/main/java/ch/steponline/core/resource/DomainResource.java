@@ -105,9 +105,8 @@ public class DomainResource {
 
     @RequestMapping(path="nation", method= RequestMethod.GET)
     @ApiOperation(value="List of all Nations")
-    public @ResponseBody List<DomainDTO> getNations() {
-        List<Domain> domains= domainRepo.findAllDomainsWithRole(DomainRole.ROLES.NATION.toString());
-        return getDomainDtos(domains);
+    public @ResponseBody List<Domain> getNations() {
+        return domainRepo.findAllActiveDomainsWithRole(DomainRole.ROLES.NATION.toString());
     }
 
     private List<DomainDTO> getDomainDtos(List<Domain> domains) {

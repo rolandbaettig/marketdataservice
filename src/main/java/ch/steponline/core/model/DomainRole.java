@@ -1,5 +1,6 @@
 package ch.steponline.core.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 
@@ -38,6 +39,7 @@ public class DomainRole extends VersionedEntity {
 
     @OneToMany(mappedBy = "domainRole", fetch = FetchType.EAGER)
     @org.hibernate.annotations.OptimisticLock(excluded = true)
+    @JsonIgnore
     private Set<Domain> domains = new HashSet<Domain>();
 
     private static final long serialVersionUID = -6570102817645411251L;

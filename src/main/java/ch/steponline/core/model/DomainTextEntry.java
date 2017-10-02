@@ -1,5 +1,6 @@
 package ch.steponline.core.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.envers.AuditTable;
@@ -28,6 +29,7 @@ public class DomainTextEntry extends TextEntry {
     @JoinColumn(name = "SourceId", referencedColumnName = "Id", insertable = false, updatable = false,foreignKey = @ForeignKey(name = "FK_DomainTextContainer_Domain"))
     @OnDelete(action = OnDeleteAction.CASCADE)
     @org.hibernate.annotations.OptimisticLock(excluded = true)
+    @JsonIgnore
     private Domain domain;
     private static final long serialVersionUID = -6677599091674725996L;
 
