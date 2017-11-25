@@ -2,6 +2,9 @@
 INSERT INTO core.DomainRole(Id,Version) values ('CURRENCY',0);
 INSERT INTO core.DomainRole(Id,Version) values ('NATION',0);
 INSERT INTO core.DomainRole(Id,Version) values ('TERRITORIAL',0);
+INSERT INTO core.DomainRole(Id,Version) values ('PORTFOLIO_TYPE',0);
+INSERT INTO core.DomainRole(Id,Version) values ('PORTFOLIO_RISKCATEGORY',0);
+
 -- DomainRoleDefinition
 --SET IDENTITY_INSERT core.DomainRoleRelationDefinition ON;
 INSERT INTO core.DomainRoleRelationDefinition(Id,Version,Description,IsFactorVisible,IsMandatory,FromDomainRoleId,ToDomainRoleId) VALUES(3,0,'Currency belongs to Nation',TRUE,FALSE,'CURRENCY','NATION');
@@ -562,6 +565,12 @@ INSERT INTO core.Domain(Id,DomainRoleId,Version,IsCustom,DomainNo,IsoAlphabetic,
 INSERT INTO core.Domain(Id,DomainRoleId,Version,IsCustom,DomainNo,IsoAlphabetic,IsoNumeric,SortNo,ValidFrom,ValidTo) values (12796,'TERRITORIAL',0,TRUE,6015,NULL,NULL,18,'2014/01/01',NULL);
 INSERT INTO core.Domain(Id,DomainRoleId,Version,IsCustom,DomainNo,IsoAlphabetic,IsoNumeric,SortNo,ValidFrom,ValidTo) values (13200,'TERRITORIAL',0,TRUE,13200,'EU',NULL,19,'1900/01/01',NULL);
 INSERT INTO core.Domain(Id,DomainRoleId,Version,IsCustom,DomainNo,IsoAlphabetic,IsoNumeric,SortNo,ValidFrom,ValidTo) values (13202,'TERRITORIAL',0,TRUE,13202,'EWR',NULL,20,'2015/01/01',NULL);
+INSERT INTO core.Domain(Id,DomainRoleId,Version,IsCustom,DomainNo,IsoAlphabetic,IsoNumeric,SortNo,ValidFrom,ValidTo) values (14000,'PORTFOLIO_TYPE',0,TRUE,14000,'VV',NULL,1,'2015-01-01',NULL);
+INSERT INTO core.Domain(Id,DomainRoleId,Version,IsCustom,DomainNo,IsoAlphabetic,IsoNumeric,SortNo,ValidFrom,ValidTo) values (14001,'PORTFOLIO_TYPE',0,TRUE,14001,'BM',NULL,2,'2015-01-01',NULL);
+INSERT INTO core.Domain(Id,DomainRoleId,Version,IsCustom,DomainNo,IsoAlphabetic,IsoNumeric,SortNo,ValidFrom,ValidTo) values (15000,'PORTFOLIO_RISKCATEGORY',0,TRUE,15000,'LOW','1',1,'2015-01-01',NULL);
+INSERT INTO core.Domain(Id,DomainRoleId,Version,IsCustom,DomainNo,IsoAlphabetic,IsoNumeric,SortNo,ValidFrom,ValidTo) values (15001,'PORTFOLIO_RISKCATEGORY',0,TRUE,15001,'MIDDLE','2',2,'2015-01-01',NULL);
+INSERT INTO core.Domain(Id,DomainRoleId,Version,IsCustom,DomainNo,IsoAlphabetic,IsoNumeric,SortNo,ValidFrom,ValidTo) values (15002,'PORTFOLIO_RISKCATEGORY',0,TRUE,15002,'HIGH','3',3,'2015-01-01',NULL);
+INSERT INTO core.Domain(Id,DomainRoleId,Version,IsCustom,DomainNo,IsoAlphabetic,IsoNumeric,SortNo,ValidFrom,ValidTo) values (15003,'PORTFOLIO_RISKCATEGORY',0,TRUE,15003,'VERY  HIGH','4',4,'2015-01-01',NULL);
 --SET IDENTITY_INSERT core.DOMAIN OFF;
 -- Texte zu den Domains
 INSERT INTO core.DomainTextEntry(SourceId,Language,Abbreviation,Description,Documentation,Version) VALUES(1,'de','AED','UAE Dirham',NULL,0);
@@ -2494,6 +2503,12 @@ INSERT INTO core.DomainTextEntry(SourceId,Language,Abbreviation,Description,Docu
 INSERT INTO core.DomainTextEntry(SourceId,Language,Abbreviation,Description,Documentation,Version) VALUES(12796,'de','MSCI World','MSCI World',NULL,0);
 INSERT INTO core.DomainTextEntry(SourceId,Language,Abbreviation,Description,Documentation,Version) VALUES(13200,'de','EU Mitglieder','EU Mitgliedstaaten',NULL,0);
 INSERT INTO core.DomainTextEntry(SourceId,Language,Abbreviation,Description,Documentation,Version) VALUES(13202,'de','EWR','EWR Mitgliedstaaten',NULL,0);
+INSERT INTO core.DomainTextEntry(SourceId,Language,Abbreviation,Description,Documentation,Version) VALUES(14000,'de','VV','Vermögensverwaltung',NULL,0);
+INSERT INTO core.DomainTextEntry(SourceId,Language,Abbreviation,Description,Documentation,Version) VALUES(14001,'de','BM','Beratungsmandat',NULL,0);
+INSERT INTO core.DomainTextEntry(SourceId,Language,Abbreviation,Description,Documentation,Version) VALUES(15000,'de','R1','Tief',NULL,0);
+INSERT INTO core.DomainTextEntry(SourceId,Language,Abbreviation,Description,Documentation,Version) VALUES(15001,'de','R2','Mittel',NULL,0);
+INSERT INTO core.DomainTextEntry(SourceId,Language,Abbreviation,Description,Documentation,Version) VALUES(15002,'de','R3','Hoch',NULL,0);
+INSERT INTO core.DomainTextEntry(SourceId,Language,Abbreviation,Description,Documentation,Version) VALUES(15003,'de','R4','Sehr hoch',NULL,0);
 -- DomainRelation
 --SET IDENTITY_INSERT core.DomainRelation ON;
 INSERT INTO core.DomainRelation(Id,Version,DomainRoleRelationDefinitionId,DomainFromId,DomainToId,Factor,ValidFrom,ValidTo) VALUES(600,0,3,2,637,1,'1900/01/01',NULL);

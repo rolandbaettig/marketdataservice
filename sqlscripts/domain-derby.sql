@@ -2505,10 +2505,10 @@ INSERT INTO core.DomainTextEntry(SourceId,Language,Abbreviation,Description,Docu
 INSERT INTO core.DomainTextEntry(SourceId,Language,Abbreviation,Description,Documentation,Version) VALUES(13202,'de','EWR','EWR Mitgliedstaaten',NULL,0);
 INSERT INTO core.DomainTextEntry(SourceId,Language,Abbreviation,Description,Documentation,Version) VALUES(14000,'de','VV','Vermögensverwaltung',NULL,0);
 INSERT INTO core.DomainTextEntry(SourceId,Language,Abbreviation,Description,Documentation,Version) VALUES(14001,'de','BM','Beratungsmandat',NULL,0);
-INSERT INTO core.DomainTextEntry(SourceId,Language,Abbreviation,Description,Documentation,Version) VALUES(15000,'de','Klein','Klein',NULL,0);
-INSERT INTO core.DomainTextEntry(SourceId,Language,Abbreviation,Description,Documentation,Version) VALUES(15001,'de','Mittel','Mittel',NULL,0);
-INSERT INTO core.DomainTextEntry(SourceId,Language,Abbreviation,Description,Documentation,Version) VALUES(15002,'de','Hoch','Hoch',NULL,0);
-INSERT INTO core.DomainTextEntry(SourceId,Language,Abbreviation,Description,Documentation,Version) VALUES(15003,'de','Sehr Hoch','Sehr Hoch',NULL,0);
+INSERT INTO core.DomainTextEntry(SourceId,Language,Abbreviation,Description,Documentation,Version) VALUES(15000,'de','R1','Tief',NULL,0);
+INSERT INTO core.DomainTextEntry(SourceId,Language,Abbreviation,Description,Documentation,Version) VALUES(15001,'de','R2','Mittel',NULL,0);
+INSERT INTO core.DomainTextEntry(SourceId,Language,Abbreviation,Description,Documentation,Version) VALUES(15002,'de','R3','Hoch',NULL,0);
+INSERT INTO core.DomainTextEntry(SourceId,Language,Abbreviation,Description,Documentation,Version) VALUES(15003,'de','R4','Sehr Hoch',NULL,0);
 -- DomainRelation
 --SET IDENTITY_INSERT core.DomainRelation ON;
 INSERT INTO core.DomainRelation(Id,Version,DomainRoleRelationDefinitionId,DomainFromId,DomainToId,Factor,ValidFrom,ValidTo) VALUES(600,0,3,2,637,1,'1900-01-01',NULL);
