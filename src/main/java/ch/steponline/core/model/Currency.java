@@ -4,7 +4,7 @@ import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.ParamDef;
 
 import javax.persistence.*;
-import java.io.Serializable;
+
 
 /**
  * Created by IntelliJ IDEA.
