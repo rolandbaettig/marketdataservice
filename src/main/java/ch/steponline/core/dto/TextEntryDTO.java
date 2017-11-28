@@ -12,7 +12,7 @@ import java.util.Arrays;
  */
 @JsonFilter("TextEntryFilter")
 public class TextEntryDTO implements Serializable{
-    public enum POSSIBLE_PROPERTIES{language,appreviation,description,documentation};
+    public enum POSSIBLE_PROPERTIES{language,appreviation,description,documentation}
 
     private String language;
 

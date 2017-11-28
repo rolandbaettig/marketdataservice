@@ -1,4 +1,6 @@
-package ch.steponline.core.model;
+package ch.steponline.portfolio.model;
+
+import ch.steponline.core.model.Domain;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;

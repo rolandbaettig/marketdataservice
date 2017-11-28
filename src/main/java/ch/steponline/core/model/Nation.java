@@ -37,7 +37,7 @@ public class Nation extends TerritorialDomain implements Serializable {
         List<Currency> currencies=new ArrayList<Currency>();
         for (DomainRelation dr : this.getFromDomainRelations()) {
             if (dr.getDomainRoleRelationDefinition().isNationToCurrencyRelation()) {
-                if ((onlyValid && dr.getValidTo() ==null) || !onlyValid) {
+                if (!onlyValid || dr.getValidTo() == null) {
                     currencies.add((Currency) dr.getDomainTo());
                 }
             }

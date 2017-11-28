@@ -168,6 +168,10 @@ public class DomainRoleRelationDefinition extends VersionedEntity {
         }
         return null;
     }
+
+    public boolean isAssetTypeGroupRelation() {
+        return getId()!=null && getId().equals(21L);
+    }
 //****************************************
     // Getters / Setters
     //****************************************

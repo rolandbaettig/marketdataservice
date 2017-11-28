@@ -1,8 +1,7 @@
 package ch.steponline.portfolio.model;
 
 import ch.steponline.core.model.Currency;
-import ch.steponline.core.model.PortfolioType;
-import ch.steponline.core.model.RiskCategory;
+import ch.steponline.core.model.VersionedEntity;
 import ch.steponline.identity.model.User;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.FilterDef;
@@ -13,7 +12,6 @@ import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 
 import javax.persistence.*;
-import javax.sound.sampled.Port;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -62,7 +60,7 @@ import java.util.*;
         @NamedQuery(name = "PortfolioAccessAllowed", query = "select p from Portfolio p join p.allowedUsers a where p.id=:portfolioId and a.id=:userId")
 }
 )
-public class Portfolio {
+public class Portfolio extends VersionedEntity{
     @Id
     @GeneratedValue(generator="portfolio_seq",strategy = GenerationType.AUTO)
     @SequenceGenerator(name="portfolio_seq",schema = "portfolio",sequenceName = "Portfolio_Seq",initialValue = 100000,allocationSize = 1)

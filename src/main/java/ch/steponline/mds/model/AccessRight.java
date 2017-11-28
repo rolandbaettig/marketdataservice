@@ -56,7 +56,7 @@ public class AccessRight extends VersionedEntity{
         this.securedObject = securedObject;
     }
 
-    public static enum PERMISSION {
+    public enum PERMISSION {
         CREATE("CREATE"),
         READ("READ"),
         UPDATE("UPDATE"),
@@ -66,7 +66,7 @@ public class AccessRight extends VersionedEntity{
 
         private String id;
 
-        private PERMISSION(String id) {
+        PERMISSION(String id) {
             this.id = id;
         }
 
@@ -79,12 +79,12 @@ public class AccessRight extends VersionedEntity{
         }
     }
 
-    public static enum OBJECT {
+    public enum OBJECT {
         ASSETGROUP("ASSET_GROUP");
 
         private String id;
 
-        private OBJECT(String id) {this.id=id;}
+        OBJECT(String id) {this.id=id;}
 
         public String getId() {
             return id;

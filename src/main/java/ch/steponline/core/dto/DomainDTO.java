@@ -19,7 +19,7 @@ import java.util.List;
 @ApiModel(value = "DomainDto")
 public class DomainDTO implements Serializable{
         public enum POSSIBLE_PROPERTIES{
-            id,domainRole,validFrom,validTo,domainNo,custom,isoAlphabetic,isoNumeric,sortNo,textEntries;
+            id,domainRole,validFrom,validTo,domainNo,custom,isoAlphabetic,isoNumeric,sortNo,textEntries
         }
 
         public enum POSSIBLE_CHILDS {

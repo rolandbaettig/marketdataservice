@@ -1,11 +1,9 @@
 package ch.steponline.core.model;
 
-import org.hibernate.envers.AuditTable;
-import org.hibernate.envers.Audited;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 
 /**
  * Created by IntelliJ IDEA.
