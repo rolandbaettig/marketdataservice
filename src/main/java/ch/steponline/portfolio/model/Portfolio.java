@@ -38,10 +38,7 @@ import java.util.*;
                         columnList = "ReferenceCurrencyId"),
                 @Index(
                         name = "IDX_Portfolio_StrategyId",
-                        columnList = "StrategyId"),
-                @Index(
-                        name = "IDX_Portfolio_ReferencePortfolio",
-                        columnList = "ReferencedPortfolioId")
+                        columnList = "StrategyId")
         }
 )
 @Audited
@@ -104,12 +101,7 @@ public class Portfolio extends VersionedEntity{
     private Set<Position> positions = new HashSet<>();
 
     @OneToMany(mappedBy = "referencedPortfolio")
-    private Set<Portfolio> simulations=new HashSet<>();
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @OptimisticLock(excluded = true)
-    @JoinColumn(name="ReferencedPortfolioId",referencedColumnName = "Id")
-    private Portfolio referencedPortfolio;
+    private Set<Simulation> simulations=new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -175,6 +167,7 @@ public class Portfolio extends VersionedEntity{
 
     public void setReferenceCurrencyId(Currency referenceCurrencyId) {
         this.referenceCurrencyId = referenceCurrencyId;
+        setReferenceCurrency(referenceCurrencyId.getIsoCode());
     }
 
     public String getReferenceCurrency() {
@@ -217,20 +210,12 @@ public class Portfolio extends VersionedEntity{
         this.positions = positions;
     }
 
-    public Set<Portfolio> getSimulations() {
+    public Set<Simulation> getSimulations() {
         return simulations;
     }
 
-    public void setSimulations(Set<Portfolio> simulations) {
+    public void setSimulations(Set<Simulation> simulations) {
         this.simulations = simulations;
-    }
-
-    public Portfolio getReferencedPortfolio() {
-        return referencedPortfolio;
-    }
-
-    public void setReferencedPortfolio(Portfolio referencedPortfolio) {
-        this.referencedPortfolio = referencedPortfolio;
     }
 
     public List<User> getAllowedUsers() {

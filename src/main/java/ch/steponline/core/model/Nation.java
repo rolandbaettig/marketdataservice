@@ -1,5 +1,8 @@
 package ch.steponline.core.model;
 
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
@@ -29,6 +32,8 @@ import java.util.List;
                         "and n.validFrom<=:evalDate and (n.validTo is null or n.validTo>=:evalDate) " +
                         "order by n.sortNo,n.isoAlphabetic")
 })
+@Audited
+@AuditTable(value = "Domain", schema = "audit")
 public class Nation extends TerritorialDomain implements Serializable {
 
     private static final long serialVersionUID = 8061441391773670408L;

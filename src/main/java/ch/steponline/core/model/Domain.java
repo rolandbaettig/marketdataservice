@@ -1,28 +1,21 @@
 package ch.steponline.core.model;
 
 import ch.steponline.mds.util.SystemDefaultLanguage;
-import com.fasterxml.jackson.annotation.JsonFilter;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.envers.AuditJoinTable;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
-import org.hibernate.envers.NotAudited;
 
 import javax.persistence.*;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.Index;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by IntelliJ IDEA.
@@ -303,6 +296,16 @@ public abstract class Domain extends VersionedEntity {
     public String getAbbreviation(String language) {
         TextEntry textEntry=getTextEntry(language);
         if (textEntry!=null) return textEntry.getAbbreviation();
+        throw new IllegalArgumentException("No TextEntry found for Object DomainRoleRelationDefinition Id: "+getId()+" and Language: "+language);
+    }
+
+    public String getDescription(){
+        return getDescription(SystemDefaultLanguage.getInstance().getLanguage());
+    }
+
+    public String getDescription(String language) {
+        TextEntry textEntry=getTextEntry(language);
+        if (textEntry!=null) return textEntry.getDescription();
         throw new IllegalArgumentException("No TextEntry found for Object DomainRoleRelationDefinition Id: "+getId()+" and Language: "+language);
     }
     //****************************************

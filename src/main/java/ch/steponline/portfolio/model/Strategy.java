@@ -17,4 +17,23 @@ public class Strategy {
     @Column(name = "Id")
     @ApiModelProperty(value="Id of the strategy",example="1",position = 1)
     private Long id;
+
+    @Column(name="Name",nullable=false,length = 255)
+    private String name;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

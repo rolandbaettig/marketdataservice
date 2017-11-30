@@ -1,5 +1,8 @@
 package ch.steponline.core.model;
 
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
@@ -24,6 +27,8 @@ import java.util.List;
                         "join roleDef.toDomainRole nationRole " +
                         "where domRel.domainFrom.id = :territorialId and territorial.id = 'TERRITORIAL' and nationRole.id = 'NATION'")
 })
+@Audited
+@AuditTable(value = "Domain", schema = "audit")
 public class TerritorialDomain extends Domain {
 
     private static final long serialVersionUID = 3843445586983303871L;

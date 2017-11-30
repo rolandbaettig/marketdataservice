@@ -2,6 +2,8 @@ package ch.steponline.core.model;
 
 import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.ParamDef;
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 
@@ -27,6 +29,8 @@ import javax.persistence.*;
         @FilterDef(name = "EvalDate",parameters = {@ParamDef(name="evalDate",type="date")})
     }
 )
+@Audited
+@AuditTable(value = "Domain", schema = "audit")
 public class Currency extends Domain{
 
    private static final long serialVersionUID = 1607107941976356395L;
