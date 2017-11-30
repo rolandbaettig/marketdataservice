@@ -4,17 +4,21 @@ INSERT INTO core.DomainRole(Id,Version) values ('NATION',0);
 INSERT INTO core.DomainRole(Id,Version) values ('TERRITORIAL',0);
 INSERT INTO core.DomainRole(Id,Version) values ('PORTFOLIO_TYPE',0);
 INSERT INTO core.DomainRole(Id,Version) values ('PORTFOLIO_RISKCATEGORY',0);
+INSERT INTO core.DomainRole(Id,Version) values ('ASSET_TYPE_GROUP',0);
+INSERT INTO core.DomainRole(Id,Version) values ('ASSET_TYPE',0);
 
 -- DomainRoleDefinition
 --SET IDENTITY_INSERT core.DomainRoleRelationDefinition ON;
 INSERT INTO core.DomainRoleRelationDefinition(Id,Version,Description,IsFactorVisible,IsMandatory,FromDomainRoleId,ToDomainRoleId) VALUES(3,0,'Currency belongs to Nation',TRUE,FALSE,'CURRENCY','NATION');
 INSERT INTO core.DomainRoleRelationDefinition(Id,Version,Description,IsFactorVisible,IsMandatory,FromDomainRoleId,ToDomainRoleId) VALUES(4,0,'Nation has Currency',TRUE,FALSE,'NATION','CURRENCY');
 INSERT INTO core.DomainRoleRelationDefinition(Id,Version,Description,IsFactorVisible,IsMandatory,FromDomainRoleId,ToDomainRoleId) VALUES(48,0,'Territorial has Nations',TRUE,FALSE,'TERRITORIAL','NATION');
+INSERT INTO core.DomainRoleRelationDefinition(Id,Version,Description,IsFactorVisible,IsMandatory,FromDomainRoleId,ToDomainRoleId) VALUES(21,0,'AssetTypeGroup has AssetType',TRUE,FALSE,'ASSET_TYPE_GROUP','ASSET_TYPE');
 --SET IDENTITY_INSERT core.DomainRoleRelationDefinition OFF;
 
 INSERT INTO core.DomainRoleRelDefTextContainer(SourceId,Language,Abbreviation,Description,Documentation,Version) VALUES(3,'de',NULL,'ist Landeswährung von',NULL,0);
 INSERT INTO core.DomainRoleRelDefTextContainer(SourceId,Language,Abbreviation,Description,Documentation,Version) VALUES(4,'de',NULL,'hat als Landeswährung',NULL,0);
 INSERT INTO core.DomainRoleRelDefTextContainer(SourceId,Language,Abbreviation,Description,Documentation,Version) VALUES(48,'de',NULL,'besteht aus',NULL,0);
+INSERT INTO core.DomainRoleRelDefTextContainer(SourceId,Language,Abbreviation,Description,Documentation,Version) VALUES(21,'de',NULL,'besteht aus',NULL,0);
 -- Domains
 --SET IDENTITY_INSERT core.DOMAIN ON;
 INSERT INTO core.Domain(Id,DomainRoleId,Version,IsCustom,DomainNo,IsoAlphabetic,IsoNumeric,SortNo,ValidFrom,ValidTo) values (1,'CURRENCY',0,FALSE,1,'AED',NULL,5,'1900/01/01',NULL);

@@ -75,15 +75,19 @@ public class Portfolio extends VersionedEntity{
     private String no;
     @Column(name="Name",nullable = false)
     private String name;
-    @Column(name="ReferenceCurrencyId",nullable = false)
+
+    @ManyToOne(optional = false,fetch = FetchType.EAGER)
+    @JoinColumn(name="ReferenceCurrencyId",referencedColumnName = "Id")
     private Currency referenceCurrencyId;
+
     /* This is a redundancy of the IsoAlphabetic of the Domain from referenceCurrencyId
     and it has to be actualized if the ReferenceCurrencyId is changed
      */
     @Column(name="ReferenceCurrency",nullable = false)
     private String referenceCurrency;
 
-    @Column(name="TypeId",nullable = false)
+    @ManyToOne(optional=false,fetch=FetchType.EAGER)
+    @JoinColumn(name="TypeId",referencedColumnName = "Id")
     private PortfolioType type;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
@@ -91,10 +95,11 @@ public class Portfolio extends VersionedEntity{
     @JoinColumn(name="StrategyId",referencedColumnName = "Id")
     private Strategy strategy;
 
-    @Column(name="RiskCategoryId",nullable = true)
+    @ManyToOne(optional=false,fetch=FetchType.EAGER)
+    @JoinColumn(name="RiskCategoryId",referencedColumnName = "Id")
     private RiskCategory riskCategory;
 
-    @Column(name="TotalAmount",nullable = false)
+    @Column(name="TotalAmount",nullable = true)
     private BigDecimal totalAmount;
 
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "portfolio")

@@ -1,6 +1,8 @@
 package ch.steponline.portfolio.model;
 
 import ch.steponline.core.model.Domain;
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -24,6 +26,8 @@ import java.io.Serializable;
                         "where n.validFrom<=:evalDate and (n.validTo is null or n.validTo>=:evalDate) " +
                         "order by n.sortNo,n.isoAlphabetic"),
 })
+@Audited
+@AuditTable(value = "Domain", schema = "audit")
 public class RiskCategory extends Domain implements Serializable {
 
 

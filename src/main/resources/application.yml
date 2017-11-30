@@ -34,7 +34,7 @@ spring:
         username: postgres
         password: stepae02
         initialize: true
-        data: file:${user.dir}/sqlscripts/domain-${spring.datasource.platform}.sql, file:${user.dir}/sqlscripts/mds.sql
+        data: file:${user.dir}/sqlscripts/domain-${spring.datasource.platform}.sql, file:${user.dir}/sqlscripts/mds.sql, file:${user.dir}/sqlscripts/portfolio.sql
         driver-class-name: org.postgresql.Driver
         platform: postgresql
     jpa:
